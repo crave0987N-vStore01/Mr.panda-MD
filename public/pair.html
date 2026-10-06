@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!-- Mr.Panda MD — © 2026 R.M.Chandula Anuhas. All Rights Reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#030816">
+<title>Mr.Panda MD — Pair Device</title>
+<link rel="icon" href="/logo.jpg">
+<link rel="preload" as="image" href="/bg.jpg">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--b1:#1e90ff;--b2:#4db2ff;--b3:#0b5cd6;--ink:#eaf3ff;--mute:#8fb0e6;--glass:rgba(8,20,52,.62);--edge:rgba(77,178,255,.38);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+html,body{min-height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#030816;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:-3;background:url(/bg.jpg) center/cover no-repeat;transform:scale(1.04);animation:drift 28s ease-in-out infinite alternate}
+.veil{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 0%,rgba(3,8,22,.15),rgba(3,8,22,.78) 60%,#030816 100%)}
+@keyframes drift{from{transform:scale(1.04) translateY(0)}to{transform:scale(1.1) translateY(-14px)}}
+.dust{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.dust i{position:absolute;top:-20px;width:7px;height:7px;border-radius:50% 0 50% 0;background:var(--b2);opacity:.7;box-shadow:0 0 10px var(--b1);animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.wrap{max-width:460px;margin:0 auto;padding:max(22px,env(safe-area-inset-top)) 18px max(30px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid var(--edge);border-radius:99px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--b2)}
+.pill u{width:7px;height:7px;border-radius:50%;background:#2ee6a6;box-shadow:0 0 8px #2ee6a6;text-decoration:none;animation:blink 1.8s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hero{text-align:center;margin:26px 0 22px}
+.orb{position:relative;width:150px;height:150px;margin:0 auto 18px;border-radius:50%;padding:5px;background:conic-gradient(from 0deg,var(--b1),#031a4d,var(--b2),#031a4d,var(--b1));animation:spin 7s linear infinite;box-shadow:0 0 50px rgba(30,144,255,.55),0 0 110px rgba(30,144,255,.25)}
+.orb img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;animation:spin 7s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+h1{font-size:clamp(34px,10vw,46px);font-weight:900;letter-spacing:-.02em;line-height:1;background:linear-gradient(180deg,#fff 20%,var(--b2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(30,144,255,.6))}
+h1 span{display:block;font-size:.5em;letter-spacing:.5em;margin-top:8px;color:var(--b1);-webkit-text-fill-color:var(--b1)}
+.lede{margin-top:14px;font-size:14px;line-height:1.6;color:var(--mute)}
+.card{position:relative;width:100%;border-radius:26px;padding:20px 18px 22px;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--edge);box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 0 40px rgba(30,144,255,.08)}
+.card::before{content:'';position:absolute;inset:-1px;border-radius:27px;padding:1px;background:linear-gradient(140deg,var(--b2),transparent 35%,transparent 65%,var(--b1));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:rgba(2,8,26,.7);border:1px solid var(--edge)}
+.tab{border:0;border-radius:12px;padding:12px 6px;background:transparent;color:var(--mute);font:700 13px system-ui;letter-spacing:.04em;cursor:pointer;transition:.25s}
+.tab b{margin-right:6px;font:700 11px var(--mono);opacity:.7}
+.tab.active{background:linear-gradient(135deg,var(--b1),var(--b3));color:#fff;box-shadow:0 0 20px rgba(30,144,255,.55)}
+.view{display:none;padding-top:20px;animation:rise .35s ease}
+.view.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+.qr{position:relative;width:236px;height:236px;margin:0 auto;border-radius:22px;padding:12px;background:#fff;box-shadow:0 0 0 4px rgba(30,144,255,.25),0 0 40px rgba(30,144,255,.5);overflow:hidden}
+.qr img{display:none;width:100%;height:100%;border-radius:12px}
+.qr .wait{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#0b3a8f;font:700 13px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.qr .scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--b1),transparent);box-shadow:0 0 14px var(--b1);animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{0%{top:6%}50%{top:92%}100%{top:6%}}
+.br{position:absolute;width:20px;height:20px;border:3px solid var(--b1);z-index:2}
+.br.a{top:6px;left:6px;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
+.br.b{top:6px;right:6px;border-left:0;border-bottom:0;border-radius:0 8px 0 0}
+.br.c{bottom:6px;left:6px;border-right:0;border-top:0;border-radius:0 0 0 8px}
+.br.d{bottom:6px;right:6px;border-left:0;border-top:0;border-radius:0 0 8px 0}
+.hint{display:block;text-align:center;margin-top:12px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.kicker{text-align:center;font:700 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--b2);margin-bottom:14px}
+label.f{display:block;font-size:12px;color:var(--mute);margin-bottom:8px}
+.in{width:100%;padding:15px 16px;border-radius:14px;border:1px solid var(--edge);background:rgba(2,8,26,.75);color:#fff;font:600 20px var(--mono);letter-spacing:.12em;text-align:center;outline:0;transition:.2s}
+.in::placeholder{color:#3d5a94;letter-spacing:.08em}
+.in:focus{border-color:var(--b2);box-shadow:0 0 22px rgba(30,144,255,.45)}
+.btn{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--b1),var(--b3));color:#fff;font:800 14px system-ui;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 26px rgba(30,144,255,.45);transition:.2s}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.6}
+.btn.ghost{background:transparent;border:1.5px solid var(--b1);box-shadow:none;color:var(--b2)}
+.code{display:none;margin-top:16px;padding:18px 10px;border-radius:16px;text-align:center;cursor:pointer;background:linear-gradient(135deg,rgba(30,144,255,.22),rgba(11,92,214,.12));border:1.5px dashed var(--b2);color:#fff;font:800 32px var(--mono);letter-spacing:.2em;text-shadow:0 0 18px var(--b1);word-break:break-all}
+.code.small{font:600 13px system-ui;letter-spacing:0;color:#ff8da1;border-color:#ff6b81;text-shadow:none}
+.steps{list-style:none;margin-top:20px;display:grid;gap:10px}
+.steps li{display:flex;gap:12px;align-items:center;font-size:13px;line-height:1.45;color:#c4d9ff}
+.steps b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:800 12px var(--mono);background:rgba(30,144,255,.2);border:1px solid var(--b1);color:var(--b2)}
+.status{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(77,178,255,.2);font:600 12px var(--mono);letter-spacing:.08em;color:var(--mute);text-transform:uppercase}
+.dot{width:10px;height:10px;border-radius:50%;background:#555}
+.dot.on{background:#2ee6a6;box-shadow:0 0 12px #2ee6a6}
+.dot.off{background:#ff4d6d;box-shadow:0 0 10px #ff4d6d;animation:blink 1.4s infinite}
+#myBots{margin-top:12px;text-align:center;font:500 12px/1.9 var(--mono);color:var(--mute)}
+.stats{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.stat{padding:14px 6px;text-align:center;border-radius:18px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.stat b{display:block;font:900 22px var(--mono);color:#fff;text-shadow:0 0 14px var(--b1)}
+.stat span{display:block;margin-top:4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.foot{margin-top:22px;text-align:center;font:500 11px var(--mono);letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+.foot b{color:var(--b2)}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="veil"></div><div class="dust" id="dust"></div>
+
+<main class="wrap">
+  <div class="pill"><u></u>Mr.Panda MD · Pair Device</div>
+
+  <header class="hero">
+    <div class="orb"><img src="/logo.jpg" alt="Mr.Panda MD"></div>
+    <h1>Mr.Panda<span>MD</span></h1>
+    <p class="lede">Link your WhatsApp in seconds.<br>Scan the code or use a pair code.</p>
+  </header>
+
+  <section class="card">
+    <div class="seg">
+      <button class="tab active" id="tabQr" onclick="switchTab('qr')"><b>01</b>QR Code</button>
+      <button class="tab" id="tabCode" onclick="switchTab('code')"><b>02</b>Pair Code</button>
+    </div>
+
+    <div class="view active" id="viewQr">
+      <div class="qr">
+        <i class="br a"></i><i class="br b"></i><i class="br c"></i><i class="br d"></i>
+        <img id="qrImg" src="" alt="QR code">
+        <div class="wait" id="qrLoading">Preparing</div>
+        <div class="scan"></div>
+      </div>
+      <span class="hint" id="qrHint">refreshes automatically</span>
+      <ol class="steps">
+        <li><b>1</b><span>Open WhatsApp on your phone.</span></li>
+        <li><b>2</b><span>Settings, then Linked Devices.</span></li>
+        <li><b>3</b><span>Tap Link a Device and scan the code above.</span></li>
+      </ol>
+    </div>
+
+    <div class="view" id="viewCode">
+      <div class="kicker">Link with phone number</div>
+      <label class="f" for="numInput">Your number with country code</label>
+      <input class="in" id="numInput" type="tel" inputmode="numeric" placeholder="947XXXXXXXX" autocomplete="off">
+      <button class="btn" id="codeBtn" onclick="getPairCode()">Get Pair Code</button>
+      <div class="code" id="codeBox" onclick="copyCode()"></div>
+      <ol class="steps">
+        <li><b>1</b><span>Digits only. No plus sign, no spaces.</span></li>
+        <li><b>2</b><span>WhatsApp, Settings, Linked Devices, Link a Device.</span></li>
+        <li><b>3</b><span>Choose "Link with phone number instead" and enter the code.</span></li>
+      </ol>
+    </div>
+
+    <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Checking status</span></div>
+    <button class="btn ghost" id="anotherBtn" style="display:none" onclick="pairAnother()">Pair another number</button>
+    <div id="myBots"></div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><b>270+</b><span>Commands</span></div>
+    <div class="stat"><b id="statBots">0</b><span>Online</span></div>
+    <div class="stat"><b>24/7</b><span>Uptime</span></div>
+  </div>
+  <p class="foot">Crafted by <b>R.M.Chandula Anuhas</b></p>
+</main>
+
+<script>
+/* ---- tiny synthesized chimes (no audio files) ---- */
+let audioCtx = null;
+const getCtx = () => (audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)());
+function tone(f, d, delay, type, g) {
+  try {
+    const c = getCtx(); if (c.state === 'suspended') c.resume();
+    setTimeout(() => {
+      const o = c.createOscillator(), gn = c.createGain();
+      o.type = type || 'sine'; o.frequency.value = f;
+      gn.gain.setValueAtTime(g || .06, c.currentTime);
+      gn.gain.exponentialRampToValueAtTime(.0001, c.currentTime + d / 1000);
+      o.connect(gn).connect(c.destination); o.start(); o.stop(c.currentTime + d / 1000);
+    }, delay || 0);
+  } catch (e) {}
+}
+const playWelcome = () => { tone(440, 120, 0, 'triangle', .05); tone(659, 140, 110, 'triangle', .05); tone(880, 200, 240, 'triangle', .06); };
+const playQrReady = () => tone(587, 90, 0, 'sine', .05);
+const playConnected = () => { tone(523, 110, 0, 'triangle', .07); tone(659, 110, 100, 'triangle', .07); tone(784, 140, 200, 'triangle', .08); tone(1046, 240, 340, 'triangle', .08); };
+let unlocked = false;
+function unlock() { if (unlocked) return; unlocked = true; playWelcome(); ['click', 'touchstart', 'keydown'].forEach(e => document.removeEventListener(e, unlock)); }
+['click', 'touchstart', 'keydown'].forEach(e => document.addEventListener(e, unlock));
+
+/* ---- session ---- */
+let sessionId = null;
+const myList = () => { try { return JSON.parse(localStorage.getItem('panda_sessions') || '[]'); } catch (e) { return []; } };
+function rememberSession(id) { const l = myList().filter((x) => x !== id); l.push(id); localStorage.setItem('panda_sessions', JSON.stringify(l.slice(-30))); }
+async function ensureSession(forceNew) {
+  const stored = forceNew || new URLSearchParams(location.search).has('new') ? null : localStorage.getItem('panda_session_id');
+  if (stored) {
+    try { const r = await fetch('/health?session=' + encodeURIComponent(stored)); const d = await r.json(); if (d.exists) { sessionId = stored; return sessionId; } } catch (e) {}
+  }
+  const r = await fetch('/api/new-session', { method: 'POST' });
+  const d = await r.json().catch(() => ({}));
+  if (!d.sessionId) { document.getElementById('statusText').innerText = d.error || 'Could not start a new session.'; document.getElementById('statusDot').className = 'dot off'; return null; }
+  sessionId = d.sessionId; localStorage.setItem('panda_session_id', sessionId); rememberSession(sessionId);
+  return sessionId;
+}
+async function pairAnother() {
+  clearInterval(statusTimer); clearInterval(qrTimer); chimed = false; qrChimed = false;
+  document.getElementById('anotherBtn').style.display = 'none';
+  document.getElementById('codeBox').style.display = 'none'; document.getElementById('numInput').value = '';
+  const img = document.getElementById('qrImg'); img.style.display = 'none'; img.removeAttribute('src');
+  const w = document.getElementById('qrLoading'); w.style.display = 'flex'; w.innerText = 'Preparing';
+  document.querySelector('.scan').style.display = '';
+  document.getElementById('statusText').innerText = 'Starting a new session'; document.getElementById('statusDot').className = 'dot off';
+  if (await ensureSession(true)) startQr();
+}
+async function showMyBots() {
+  const ids = myList(), box = document.getElementById('myBots'); if (!ids.length) { box.innerHTML = ''; return; }
+  const rows = [];
+  for (const id of ids.slice().reverse()) {
+    try { const d = await (await fetch('/health?session=' + encodeURIComponent(id))).json(); if (d.exists && d.number) rows.push((d.connected ? '🟢 ' : '🔴 ') + d.number); } catch (e) {}
+  }
+  box.innerHTML = rows.length ? 'Your linked numbers<br>' + rows.join('<br>') : '';
+}
+
+/* ---- status ---- */
+let chimed = false, statusTimer = null;
+async function checkStatus() {
+  const dot = document.getElementById('statusDot'), text = document.getElementById('statusText');
+  try {
+    const r = await fetch('/health?session=' + encodeURIComponent(sessionId));
+    const d = await r.json();
+    if (d.connected) {
+      dot.className = 'dot on'; text.innerText = 'Bot connected';
+      document.getElementById('anotherBtn').style.display = 'block'; showMyBots();
+      if (!chimed) { chimed = true; playConnected(); }
+      clearInterval(statusTimer); statusTimer = setInterval(checkStatus, 8000);
+    } else { dot.className = 'dot off'; text.innerText = 'Waiting for connection'; }
+  } catch (e) { text.innerText = 'Status unavailable'; }
+}
+function pollStatus(fast) { checkStatus(); clearInterval(statusTimer); statusTimer = setInterval(checkStatus, fast ? 3000 : 8000); }
+async function refreshStats() {
+  try { const r = await fetch('/api/stats'); const d = await r.json(); document.getElementById('statBots').innerText = d.active; } catch (e) {}
+}
+
+/* ---- QR ---- */
+let qrTimer = null, qrChimed = false;
+function refreshQR() {
+  const img = document.getElementById('qrImg'), wait = document.getElementById('qrLoading'), hint = document.getElementById('qrHint');
+  const probe = new Image();
+  probe.onload = () => {
+    img.src = probe.src; img.style.display = 'block'; wait.style.display = 'none';
+    document.querySelector('.scan').style.display = 'none';
+    hint.innerText = 'refreshes automatically';
+    if (!qrChimed) { qrChimed = true; playQrReady(); }
+  };
+  probe.onerror = async () => {
+    try {
+      const r = await fetch('/qr?session=' + encodeURIComponent(sessionId));
+      const d = await r.json().catch(() => null);
+      if (d && d.error === 'Bot is already connected!') {
+        hint.innerText = 'already connected'; img.style.display = 'none'; wait.style.display = 'flex'; wait.innerText = 'Linked';
+        clearInterval(qrTimer); qrTimer = null; return;
+      }
+    } catch (e) {}
+    wait.innerText = 'Waiting for code';
+  };
+  probe.src = '/qr?session=' + encodeURIComponent(sessionId) + '&t=' + Date.now();
+}
+function startQr() { refreshQR(); clearInterval(qrTimer); qrTimer = setInterval(refreshQR, 5000); pollStatus(true); }
+
+/* ---- tabs + pair code ---- */
+function switchTab(t) {
+  document.getElementById('viewQr').classList.toggle('active', t === 'qr');
+  document.getElementById('viewCode').classList.toggle('active', t === 'code');
+  document.getElementById('tabQr').classList.toggle('active', t === 'qr');
+  document.getElementById('tabCode').classList.toggle('active', t === 'code');
+}
+function showCode(text, isErr) {
+  const box = document.getElementById('codeBox');
+  box.style.display = 'block'; box.classList.toggle('small', !!isErr); box.innerText = text;
+}
+async function getPairCode() {
+  const btn = document.getElementById('codeBtn');
+  const number = document.getElementById('numInput').value.replace(/\D/g, '');
+  if (number.length < 8) return showCode('Enter a valid number with country code.', true);
+  btn.disabled = true; btn.innerText = 'Generating';
+  document.getElementById('codeBox').style.display = 'none';
+  try {
+    const r = await fetch('/api/pair-code', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ session: sessionId, number }) });
+    const d = await r.json();
+    if (d.code) { showCode(d.code, false); playQrReady(); } else showCode(d.error || 'Failed. Try again.', true);
+  } catch (e) { showCode('Network error. Try again.', true); }
+  btn.disabled = false; btn.innerText = 'Get pair code';
+}
+function copyCode() { try { navigator.clipboard.writeText(document.getElementById('codeBox').innerText.replace(/-/g, '')); } catch (e) {} }
+
+(async function init() { if (await ensureSession()) startQr(); refreshStats(); setInterval(refreshStats, 5000); showMyBots(); })();
+
+/* ---- drifting dust ---- */
+(function () {
+  const w = document.getElementById('dust'), n = innerWidth < 500 ? 14 : 24;
+  for (let i = 0; i < n; i++) {
+    const e = document.createElement('i'), du = 9 + Math.random() * 10;
+    e.style.left = Math.random() * 100 + 'vw'; e.style.animationDuration = du + 's'; e.style.animationDelay = (-Math.random() * du) + 's';
+    e.style.transform = 'scale(' + (.6 + Math.random() * 1.4) + ')'; w.appendChild(e);
+  }
+})();
+</script>
+</body>
+</html>
